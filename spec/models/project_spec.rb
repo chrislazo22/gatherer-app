@@ -9,7 +9,7 @@ RSpec.describe Project do
   end
 
   it "knows that a project with an incomplete task is not done" do
-    project.tasks << task.completed
+    project.tasks << task.complete?
     expect(project).to_not be(nil)
   end
 
@@ -21,7 +21,7 @@ RSpec.describe Project do
 
   describe "estimates" do
     let(:project) { Project.new }
-    let(:done) { Task.new(size:2, completed: true) }
+    let(:done) { Task.new(size:2, completed_at: true) }
     let(:small_not_done) { Task.new(size:1) }
     let(:large_not_done) { Task.new(size: 4) }
 
