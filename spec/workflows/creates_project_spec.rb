@@ -70,7 +70,15 @@ RSpec.describe CreatesProject do
         name: "Project Qarth", task_string: "Start Things:3\nEnd Things:2")
       creator.create
       expect(creator.project.tasks.size).to eq(2)
-      expect(creator.project).not_to be_a_new_record 
+      expect(creator.project).not_to be_a_new_record
+    end
+  end
+
+  describe "failure cases" do
+    it "fails when trying to save a project with no name" do
+      creator = CreatesProject.new(name: "", task_string: "")
+      creator.create
+      expect(creator).to_not be_a_success
     end
   end
 end

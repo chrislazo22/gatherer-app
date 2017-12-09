@@ -3,18 +3,24 @@ class CreatesProject
 
   def initialize(name: "", task_string: "")
     @name = name
-    @task_string = task_string
+    @task_string = task_string || ""
+    @success = false
+  end
+
+  def success?
+    @success
   end
 
   def build
-    self.project = Project.new(name: "Project Qarth")
+    self.project = Project.new(name: name)
     project.tasks = convert_string_to_tasks
     project
   end
 
   def create
     build
-    project.save
+    result = project.save
+    @success = result
   end
 
   def convert_string_to_tasks
